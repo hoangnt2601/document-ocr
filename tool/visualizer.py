@@ -1,4 +1,4 @@
-from vietocr.tool.translate import translate
+from tool.translate import translate
 
 def visualize(model, vocab, gen, sample=30):
     pred_sents = []

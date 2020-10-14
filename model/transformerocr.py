@@ -1,5 +1,5 @@
-from vietocr.model.cnn import CNN
-from vietocr.model.transformer import LanguageTransformer
+from model.cnn import CNN
+from model.transformer import LanguageTransformer
 from torch import nn
 
 class VietOCR(nn.Module):
