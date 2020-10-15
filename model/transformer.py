@@ -25,9 +25,12 @@ class LanguageTransformer(nn.Module):
         
     def forward(self, src, tgt, src_key_padding_mask=None, tgt_key_padding_mask=None, memory_key_padding_mask=None):
         """
+<<<<<<< HEAD
         Params:
             - src: the sequence to the encoder
             - tgt: the sequence to the decoder 
+=======
+>>>>>>> 3bfa16993b23d2aa875131bd94d786c9ff839485
         Shape:
             - src: (W, N, C)
             - tgt: (T, N) 
