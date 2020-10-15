@@ -1,0 +1,22 @@
+# url or local path
+pretrained: ./weights/transformer.pth
+
+backbone: vgg19_bn
+cnn:
+    # pooling stride size
+    ss:
+        - [2, 2]
+        - [2, 2]
+        - [2, 1]
+        - [2, 1]
+        - [1, 1]         
+    # pooling kernel size 
+    ks:
+        - [2, 2]
+        - [2, 2]
+        - [2, 1]
+        - [2, 1]
+        - [1, 1]
+    # dim of ouput feature map
+    hidden: 256
+
