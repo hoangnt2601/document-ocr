@@ -95,18 +95,26 @@ class OCRDataset(Dataset):
         buf, label, img_path = self.read_buffer(idx) 
 
         img = Image.open(buf).convert('RGB')        
-       
+
         if self.transform:
             img = self.transform(img)
 
         img_bw = process_image(img, self.image_height, self.image_min_width, self.image_max_width)
-            
-        word = self.vocab.encode(label)
+        
+        try:
+            word = self.vocab.encode(label)
+        except Exception as e:
+            print(e)
+            print(label)
+            return None
 
         return img_bw, word, img_path
 
     def __getitem__(self, idx):
-        img, word, img_path = self.read_data(idx)
+        try:
+            img, word, img_path = self.read_data(idx)
+        except Exception as e:
+            return None
         
         img_path = os.path.join(self.root_dir, img_path)
         
@@ -152,6 +160,7 @@ class ClusterRandomSampler(Sampler):
         return len(self.data_source)
 
 def collate_fn(batch):
+    batch = list(filter(lambda x: x is not None, batch))
     filenames = []
     img = []
     target_weights = []
