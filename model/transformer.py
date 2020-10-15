@@ -48,17 +48,14 @@ class LanguageTransformer(nn.Module):
         tgt = self.pos_enc(self.embed_tgt(tgt) * math.sqrt(self.d_model))
         
         output = self.transformer(src, tgt, tgt_mask=tgt_mask, src_key_padding_mask=src_key_padding_mask,
-                                  tgt_key_padding_mask=tgt_key_padding_mask, memory_key_padding_mask=memory_key_padding_mask)
+                                tgt_key_padding_mask=tgt_key_padding_mask, memory_key_padding_mask=memory_key_padding_mask)
 #        output = rearrange(output, 't n e -> n t e')
-        print('output be ', output.shape)
         output = output.transpose(0, 1)
-        print('output af ', output.shape)
         return self.fc(output)
 
     def gen_nopeek_mask(self, length):
         mask = (torch.triu(torch.ones(length, length)) == 1).transpose(0, 1)
         mask = mask.float().masked_fill(mask == 0, float('-inf')).masked_fill(mask == 1, float(0.0))
-        print('mask ', mask.shape)
         return mask
     
     def forward_encoder(self, src):

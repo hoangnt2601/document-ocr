@@ -299,7 +299,7 @@ class Trainer():
         self.model.train()
 
         batch = self.batch_to_device(batch)
-        img, tgt_input, tgt_output, tgt_padding_mask = batch['img'], batch['tgt_input'], batch['tgt_output'], batch['tgt_padding_mask']    
+        img, tgt_input, tgt_output, tgt_padding_mask = batch['img'], batch['tgt_input'], batch['tgt_output'], batch['tgt_padding_mask']
         
         outputs = self.model(img, tgt_input, tgt_key_padding_mask=tgt_padding_mask)
 #        loss = self.criterion(rearrange(outputs, 'b t v -> (b t) v'), rearrange(tgt_output, 'b o -> (b o)'))
